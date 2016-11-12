@@ -7,7 +7,8 @@ var    gulp = require('gulp'),
      rename = require('gulp-rename'),
        sass = require('gulp-sass'),
        maps = require('gulp-sourcemaps'),
-        del = require('del');
+        del = require('del'),
+   imagemin = require('gulp-imagemin');
 
 
 
@@ -51,3 +52,15 @@ gulp.task('styles', ['compileSass'], function() {
   .pipe(rename('all.min.css'))
   .pipe(gulp.dest(options.dist + '/css'));
 });
+
+gulp.task('images', function() {
+  return gulp.src(options.src + '/images/*')
+  .pipe(imagemin())
+  .pipe(gulp.dest(options.dist + '/content'));
+});
+
+gulp.task('build', ['clean'], function() {
+  gulp.start(['scripts', 'styles', 'images']);
+});
+
+gulp.task('default', ['build']);
