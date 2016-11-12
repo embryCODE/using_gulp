@@ -20,17 +20,17 @@ gulp.task('scripts', function() {
   .pipe(concat('all.min.js'))
   .pipe(uglify())
   .pipe(maps.write('./'))
-  .pipe(gulp.dest(options.dist));
+  .pipe(gulp.dest(options.dist + '/js'));
 });
 
-gulp.task("concatScripts", function() {
-    return gulp.src([
-        'js/jquery.js',
-        'js/sticky/jquery.sticky.js',
-        'js/main.js'
-        ])
-    .pipe(maps.init())
-    .pipe(concat('app.js'))
-    .pipe(maps.write('./'))
-    .pipe(gulp.dest('js'));
+gulp.task('styles', function() {
+  return gulp.src([
+    options.src + '/js/circle/*.js',
+    options.src + '/js/*.js'
+  ])
+  .pipe(maps.init())
+  .pipe(concat('all.min.js'))
+  .pipe(uglify())
+  .pipe(maps.write('./'))
+  .pipe(gulp.dest(options.dist));
 });
