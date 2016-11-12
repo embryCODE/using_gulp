@@ -73,7 +73,7 @@ gulp.task('images', function() {
 
 gulp.task('html', ['scripts', 'styles'], function() {
   return gulp.src(options.src + '/*.html')
-    .pipe(useref())
+    .pipe(useref({noAssets: true}))
     .pipe(gulp.dest(options.dist));
 });
 
