@@ -24,10 +24,10 @@ var options = {
  * Deletes dist and src/css directories
  */
 gulp.task('clean', function() {
-  del([options.dist, options.src + '/css']);
+  del([options.dist, options.src + '/css', options.src + '/js/global.js*']);
 });
 
-gulp.task('scripts', function() {
+gulp.task('compileScripts', function() {
   return gulp.src([
     options.src + '/js/circle/*.js',
     options.src + '/js/*.js',
@@ -37,10 +37,9 @@ gulp.task('scripts', function() {
   .pipe(eslint.format())
   .pipe(eslint.failAfterError())
   .pipe(maps.init())
-  .pipe(concat('all.min.js'))
-  .pipe(uglify())
+  .pipe(concat('global.js'))
   .pipe(maps.write('./'))
-  .pipe(gulp.dest(options.dist + '/js'));
+  .pipe(gulp.dest(options.src + '/js'));
 });
 
 gulp.task('compileSass', function() {
@@ -49,6 +48,13 @@ gulp.task('compileSass', function() {
   .pipe(sass())
   .pipe(maps.write('./'))
   .pipe(gulp.dest(options.src + '/css'));
+});
+
+gulp.task('scripts', ['compileScripts'], function() {
+  return gulp.src(options.src + '/js/global.js')
+  .pipe(uglify())
+  .pipe(rename('all.min.js'))
+  .pipe(gulp.dest(options.dist + '/js'));
 });
 
 gulp.task('styles', ['compileSass'], function() {
