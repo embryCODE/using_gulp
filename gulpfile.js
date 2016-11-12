@@ -17,7 +17,8 @@ gulp.task('scripts', function() {
     options.src + '/js/*.js'
   ])
   .pipe(maps.init())
-  .pipe(concat(all.min.js))
+  .pipe(concat('all.min.js'))
+  .pipe(uglify())
   .pipe(maps.write('./'))
   .pipe(gulp.dest(options.dist));
 });
