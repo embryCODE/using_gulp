@@ -9,7 +9,8 @@ var    gulp = require('gulp'),
        maps = require('gulp-sourcemaps'),
         del = require('del'),
    imagemin = require('gulp-imagemin'),
-     eslint = require('gulp-eslint');
+     eslint = require('gulp-eslint'),
+     useref = require('gulp-useref');
 
 
 
@@ -67,11 +68,21 @@ gulp.task('styles', ['compileSass'], function() {
 gulp.task('images', function() {
   return gulp.src(options.src + '/images/*')
   .pipe(imagemin())
-  .pipe(gulp.dest(options.dist + '/content'));
+  .pipe(gulp.dest(options.dist + '/images'));
+});
+
+gulp.task('html', ['scripts', 'styles'], function() {
+  return gulp.src(options.src + '/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest(options.dist));
+});
+
+gulp.task('dev', ['clean'], function() {
+  gulp.start(['compileScripts', 'compileSass']);
 });
 
 gulp.task('build', ['clean'], function() {
-  gulp.start(['scripts', 'styles', 'images']);
+  gulp.start(['html', 'images']);
 });
 
 gulp.task('default', ['build']);
