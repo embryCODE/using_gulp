@@ -8,7 +8,8 @@ var    gulp = require('gulp'),
        sass = require('gulp-sass'),
        maps = require('gulp-sourcemaps'),
         del = require('del'),
-   imagemin = require('gulp-imagemin');
+   imagemin = require('gulp-imagemin'),
+     eslint = require('gulp-eslint');
 
 
 
@@ -29,8 +30,12 @@ gulp.task('clean', function() {
 gulp.task('scripts', function() {
   return gulp.src([
     options.src + '/js/circle/*.js',
-    options.src + '/js/*.js'
+    options.src + '/js/*.js',
+    '!node_modules/**'
   ])
+  .pipe(eslint())
+  .pipe(eslint.format())
+  .pipe(eslint.failAfterError())
   .pipe(maps.init())
   .pipe(concat('all.min.js'))
   .pipe(uglify())
