@@ -83,6 +83,8 @@ gulp.task('dev', ['clean'], function() {
 
 gulp.task('build', ['clean'], function() {
   gulp.start(['html', 'images']);
+  gulp.src([options.src + '/icons/**/*'])
+  .pipe(gulp.dest(options.dist + '/icons'));
 });
 
 gulp.task('default', ['build']);
