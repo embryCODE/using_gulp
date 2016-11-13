@@ -14,6 +14,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync').create();
 
 
+
 /**
  * Sets paths for src and dist directories.
  */
@@ -28,7 +29,7 @@ var options = {
  * Deletes dist and src/css directories and removes global.js and global.js.min
  */
 gulp.task('clean', function() {
-  del([options.dist, options.src + '/css', options.src + '/js/global.js*']);
+  return del([options.dist, options.src + '/css', options.src + '/js/global.js*']);
 });
 
 /**
