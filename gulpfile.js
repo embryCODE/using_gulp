@@ -68,7 +68,7 @@ gulp.task('scripts', ['compileScripts'], function() {
   return gulp.src(options.src + '/js/global.js')
     .pipe(uglify())
     .pipe(rename('all.min.js'))
-    .pipe(gulp.dest(options.dist + '/js'));
+    .pipe(gulp.dest(options.dist + '/scripts'));
 });
 
 /**
@@ -79,7 +79,7 @@ gulp.task('styles', ['compileSass'], function() {
   return gulp.src(options.src + '/css/global.css')
     .pipe(uglifycss())
     .pipe(rename('all.min.css'))
-    .pipe(gulp.dest(options.dist + '/css'));
+    .pipe(gulp.dest(options.dist + '/styles'));
 });
 
 /**
