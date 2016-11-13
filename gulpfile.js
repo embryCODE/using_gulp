@@ -11,9 +11,7 @@ var gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   eslint = require('gulp-eslint'),
   useref = require('gulp-useref'),
-  browserSync = require('browser-sync').create(),
-  imageminMozjpeg = require('imagemin-mozjpeg'),
-  imageminOptipng = require('imagemin-optipng');
+  browserSync = require('browser-sync').create();
 
 
 /**
