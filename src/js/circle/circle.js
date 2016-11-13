@@ -2,7 +2,6 @@ $( document ).ready(function() {
 
   $('textarea').autogrow({onInitialize: true});
 
-
   //Cloner for infinite input lists
   $(".circle--clone--list").on("click", ".circle--clone--add", function(){
     var parent = $(this).parent("li");
